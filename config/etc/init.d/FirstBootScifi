@@ -1,0 +1,89 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2010 OpenWrt.org
+# Copyright (C) 2006 Carlos Sobrinho
+
+START=99
+USE_PROCD=1
+
+start_service() {
+
+#Definir mac padrão
+MAC=$(ifconfig -a | grep eth0 | awk '{print $5}');
+WLAN0=$(cat /sys/class/ieee80211/phy0/macaddress)
+ARQUIVO="/etc/config/network"
+TEMP="/tmp/network-temp"
+awk '!/macaddr/' $ARQUIVO > $TEMP
+awk -v mac=$MAC '{print $0;} /hostname/{printf "\toption macaddr\t\047%s\047\n", mac;}' $TEMP > /tmp/network
+mv /tmp/network $ARQUIVO
+rm $TEMP
+/etc/init.d/snmpd disable
+device=$(cat /www/device.txt)
+
+#Configurando o Wireless e o network para cada tipo de ap
+
+if [ "$device" = "UBNT-UAPPRO" ] || [ "$device" = "TL-WDR4300-v1" ]
+then
+#2.4ghz e 5ghz
+
+
+#Configurar o Wireless
+awk -v MAC="$MAC" -v WLAN0="$WLAN0" 'BEGIN {
+        
+# reiniciando configuracoes wifi
+        comando="wifi detect > /etc/config/wireless; mv /etc/config/wireless /tmp/wireless.old; sed \047/option disabled 1/d\047 /tmp/wireless.old | sed \047/# REMOVE THIS LINE TO ENABLE WIFI:/d\047 | sed \047/option encryption none/d\047 | sed \047/option ssid/d\047 | sed \047/config wifi-iface/d\047  | sed \047/option device   radio0/d\047  | sed \047/option device   radio1/d\047  | sed \047/option network  lan/d\047  | sed \047/option mode     ap/d\047  | awk \047NR > 1{print t} {t = $0}END{if (NF) print }\047 > /etc/config/wireless";
+        system(comando);
+
+#2.4ghz
+
+         # configurando config          
+        comando="echo \042config wifi-iface\012\011option device\011\047radio0\047\012\011option network\011\047config\047\012\011option mode\011\047ap\047\012\011option ssid\011\047config-"WLAN0"\047\012\011option encryption\011\047psk2\047\012\011option key\011\047midiacom\047\012\042 >> /etc/config/wireless";
+        system(comando);        
+
+#5ghz
+
+# configurando config          
+        comando="echo \042config wifi-iface\012\011option device\011\047radio1\047\012\011option network\011\047config\047\012\011option mode\011\047ap\047\012\011option ssid\011\047config-"WLAN0"\047\012\011option encryption\011\047psk2\047\012\011option key\011\047midiacom\047\012\042 >> /etc/config/wireless";
+        system(comando);        
+
+
+}'
+
+else
+#2.4ghz
+
+#Configurar o Wireless
+awk -v MAC="$MAC" -v WLAN0="$WLAN0" 'BEGIN {
+
+        
+# reiniciando configuracoes wifi
+        comando="wifi detect > /etc/config/wireless; mv /etc/config/wireless /tmp/wireless.old; sed \047/option disabled 1/d\047 /tmp/wireless.old | sed \047/# REMOVE THIS LINE TO ENABLE WIFI:/d\047 | sed \047/option encryption none/d\047 | sed \047/option ssid/d\047 | sed \047/config wifi-iface/d\047  | sed \047/option device   radio0/d\047  | sed \047/option network  lan/d\047  | sed \047/option mode     ap/d\047  | awk \047NR > 1{print t} {t = $0}END{if (NF) print }\047 > /etc/config/wireless";
+        system(comando);
+
+#2.4ghz
+
+         # configurando config          
+        comando="echo \042config wifi-iface\012\011option device\011\047radio0\047\012\011option network\011\047config\047\012\011option mode\011\047ap\047\012\011option ssid\011\047config-"WLAN0"\047\012\011option encryption\011\047psk2\047\012\011option key\011\047midiacom\047\012\042 >> /etc/config/wireless";
+        system(comando);        
+
+}'
+fi
+
+
+
+
+
+
+
+#Definindo senha, configurações finais api12 e desabilitando script
+echo -e "uffwificonfig\nuffwificonfig\n" |passwd root
+/etc/init.d/uhttpd enable
+/etc/init.d/dnsmasq enable
+chmod -R 777 /www/*
+/etc/init.d/network restart
+wifi
+/etc/init.d/firewall disable
+sed -i '/FirstBootScifi/d' /etc/rc.local
+/etc/init.d/FirstBootScifi disable
+
+#exit 0
+}

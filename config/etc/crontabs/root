@@ -1,0 +1,2 @@
+*/10 * * * * cd /www; /bin/sh auto_update.sh
+*/15 * * * * cd /www; /bin/sh ip.sh; /bin/sh cgi-bin/avisala.sh

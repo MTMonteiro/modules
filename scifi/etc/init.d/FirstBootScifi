@@ -1,0 +1,32 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2010 OpenWrt.org
+# Copyright (C) 2006 Carlos Sobrinho
+
+START=99
+USE_PROCD=1
+
+start_service() {
+
+#Definir mac padrão
+MAC1=$(ifconfig -a | grep eth0.1 | awk '{print $5}');
+MAC2=$(ifconfig -a | grep eth0.2 | awk '{print $5}');
+WLAN0=$(cat /sys/class/ieee80211/phy0/macaddress)
+
+
+mac1=`echo $MAC1 | awk '{print tolower ($ 0)}'`
+mac2=`echo $MAC2 | awk '{print tolower ($ 0)}'`
+
+sed ‘s/mac1/$mac1/g /etc/config/network
+sed ‘s/mac2/$mac2/g /etc/config/network
+#Definindo senha, configurações finais api12 e desabilitando script
+echo -e "uffwificonfig\nuffwificonfig\n" |passwd root
+/etc/init.d/uhttpd enable
+/etc/init.d/dnsmasq enable
+
+/etc/init.d/network restart
+wifi
+sed -i '/FirstBootScifi/d' /etc/rc.local
+/etc/init.d/FirstBootScifi disable
+
+#exit 0
+}

@@ -1,0 +1,8 @@
+5 04 * * * /bin/ash /usr/share/scifi/scripts/restart_wifi.sh &> /dev/null
+*/10 * * * * /bin/ash /usr/share/scifi/scripts/check-user-erro.sh &> /dev/null
+*/5 * * * * /bin/ash /usr/share/scifi/scripts/ping_snmp.sh &> /dev/null
+15 04 * * * /bin/ash /usr/share/scifi/scripts/snmpd_watchdog.sh &> /dev/null
+*/10 * * * * /bin/ash [ -f /tmp/canal.txt ] || /usr/share/scifi/scripts/current_
+
+
+
