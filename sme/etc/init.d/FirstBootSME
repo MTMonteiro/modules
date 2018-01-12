@@ -1,0 +1,128 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2010 OpenWrt.org
+# Copyright (C) 2006 Carlos Sobrinho
+
+START=99
+USE_PROCD=1
+
+start_service() {
+
+#Definir mac padrão
+MAC=$(ifconfig -a | grep eth0.1| awk '{print $5}');
+MAC2=$(ifconfig -a | grep eth0.2| awk '{print $5}');
+WLAN0=$(cat /sys/class/ieee80211/phy0/macaddress)
+ARQUIVO="/etc/config/network"
+TEMP="/tmp/network-temp"
+
+/etc/init.d/snmpd disable
+
+sed -n '1,10p' $TEMP
+
+echo "config interface 'lan'                              
+        option type 'bridge'                        
+        option ifname 'eth0.1'            
+        option _orig_ifname 'eth0.1 radio0.network1'
+        option _orig_bridge 'true'        
+        option proto 'none'               
+                                          
+config device 'lan_dev'                   
+        option name 'eth0.1'              
+        option macaddr '$MAC'
+                                          
+config interface 'wan'                    
+        option ifname 'eth0.2'            
+        option proto 'dhcp'               
+                                          
+config device 'wan_dev'                   
+        option name 'eth0.2'   
+        option macaddr '$MAC2'
+                               
+config interface 'wan6'        
+        option ifname 'eth0.2' 
+        option proto 'dhcpv6'  
+                                    
+config switch                      
+        option name 'switch0'       
+        option reset '1'            
+        option enable_vlan '1'      
+                                   
+config switch_vlan             
+        option device 'switch0'     
+        option vlan '1'               
+        option vid '1'             
+        option ports '0 1 3 6t'           
+                                          
+config switch_vlan                        
+        option device 'switch0'           
+        option vlan '2'                   
+        option vid '2'                    
+        option ports '2t 6t'              
+                                          
+config switch_vlan                        
+        option device 'switch0'           
+        option vlan '3'                   
+        option vid '3'                    
+        option ports '0t 6t'   
+                               
+config interface 'controle'    
+        option ifname 'eth0.3' 
+        option _orig_ifname 'eth0.3'
+        option _orig_bridge 'false' 
+        option proto 'dhcp'         
+                                    
+config interface 'config'           
+        option proto 'static'       
+        option ifname 'eth0.2'      
+        option ipaddr '192.168.1.1' 
+        option netmask '255.255.255.0'
+">> $TEMP
+
+rm $ARQUIVO
+
+mv $TEMP $ARQUIVO
+
+echo "
+
+config wifi-device 'radio0'
+        option type 'mac80211'
+        option channel '11'
+        option hwmode '11g'
+        option path 'platform/10180000.wmac'
+        option htmode 'HT20'
+        option country '00'
+        option disabled '0'
+
+config wifi-iface 'default_radio0'
+        option device 'radio0'
+        option network 'lan'
+        option mode 'ap'
+        option ssid 'EducaRio'
+        option encryption 'wpa2'
+        option key 'testing123'
+        option server '192.168.0.1'
+        option port '1812'
+
+
+config wifi-iface
+        option device 'radio0'
+        option mode 'ap'
+        option encryption 'none'
+        option ssid '$MAC'
+        option network 'lan'
+
+
+" > /tmp/wireless-tmp
+
+#Definindo senha, configurações finais api12 e desabilitando script
+mount_root
+echo -e "sme123escola\sme123escola\n" |passwd root
+/etc/init.d/uhttpd enable
+/etc/init.d/network restart
+wifi
+/etc/init.d/snmpd start
+/etc/init.d/snmpd enable
+sed -i '/FirstBootSME/d' /etc/rc.local
+/etc/init.d/FirstBootSME disable
+
+#exit 0
+}

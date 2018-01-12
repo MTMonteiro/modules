@@ -1,0 +1,25 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+/etc/init.d/FirstBootSME start
+# inicializacao do snmpd
+sh /usr/share/scifi/scripts/init_snmpd.sh &
+sleep 10
+/usr/share/scifi/scripts/current_channel.sh
+
+
+# initializing files used by vlan check
+echo "0" > /tmp/statuslan
+echo "0" > /tmp/statuswlan0
+echo "0" > /tmp/statuswlan0-1
+echo "0" > /tmp/statuswlan0-2
+echo "0" > /tmp/zero_users.txt
+wifi down
+wifi up
+
+vconfig add eth0.3 3
+ifconfig vlan3 up
+
+
+
+
+exit 0
