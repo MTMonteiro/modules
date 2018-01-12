@@ -44,9 +44,9 @@ Usage:    $0
 
 Example1: $0 TLWR740 "procd snmp-utils snmpd-static swconfig uboot-envtools ubox ubus ubusd uhttpd usign wireless-tools wpa-cli wpad"	v4
 									
-Example2: $0 ArcheC20i "openwrt" scifi v1
+Example2: $0 ArcherC20i "firewall" scifi v1
 	
-Example3: $0 TLWR740 "minimum" uff v2
+Example3: $0 TLWR740 "firewall" uff v2
 
 Return codes:
 	0 - ok
@@ -65,7 +65,7 @@ exit $1
 #checking if the first parameter is expected
  grep "$1" ./modelo_ar71xx.txt || grep "$1" ./modelo_rampis_7620.txt &> /dev/null 
 
- if [ $? -ne 0 ] && [ "$1" != "sm" ] && [ "$1" != "sp" ] && [ "$1" != "spp" ]; then
+ if [ $? -ne 0 ] && [ "$1" != "sp" ] && [ "$1" != "spp" ]; then
    echo "
  profile does not exist"
    echo "
@@ -92,24 +92,8 @@ exit $1
         cat ./modelo_rampis_7620.txt 
         exit
  fi
-
-#show modules
-   if [ $1 == "sm" ]; then 
-       echo " MODULES:
-minimum
-openwrt"
-       exit
-   fi 
   
-
-#REPLACEMENT NAME OF THE MODULE BY THE PACKAGES
- MOD=$2   
- 
-   min="hostapd-common iw jshn jsonfilter kernel kmod-ath kmod-ath9k kmod-ath9k-common kmod-cfg80211 kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-core kmod-dnsresolver kmod-fs-nfs kmod-fs-nfs-common kmod-gpio-button-hotplug kmod-mac80211 libblkid libblobmsg-json libevent libjson-c libjson-script libnetsnmp libnl-tiny libpthread librpc librt libubox libubus libuci libuuid libwrap netcat nfs-utils procd snmp-utils snmpd-static swconfig uboot-envtools ubox ubus ubusd uhttpd usign wireless-tools wpa-cli"
-   PACKAGES1=${MOD/minimum/$min}  2> /dev/null
-
-   wrt="base-files busybox dnsmasq dropbear firewall iptables iw jshn kernel kmod-ath kmod-ath9k kmod-ath9k-common kmod-cfg80211 kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-core kmod-gpio-button-hotplug kmod-ipt-conntrack kmod-ipt-core kmod-ipt-nat kmod-leds-gpio kmod-ledtrig-default-on kmod-ledtrig-netdev kmod-ledtrig-timer kmod-ledtrig-usbdev kmod-lib-crc-ccitt kmod-mac80211 kmod-nls-base kmod-ppp kmod-pppoe kmod-pppox kmod-usb-core kmod-usb-ohci kmod-usb2 libblobmsg-json libc libgcc libip4tc libiwinfo libiwinfo-lua liblua libnl-tiny libubox libubus libubus-lua libuci libuci-lua libxtables lua luci luci-app-firewall luci-lib-nixio luci-mod-admin-full luci-proto-ppp luci-theme-openwrt mtd netifd opkg ppp ppp-mod-pppoe swconfig uboot-envtools ubus ubusd uci uhttpd wireless-tools wpad-mini "
-   PACKAGES=${PACKAGES1/openwrt/$wrt} 
+ PACKAGES=$2   
 
 2> /dev/null
  
