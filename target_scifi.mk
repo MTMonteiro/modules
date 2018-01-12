@@ -12,7 +12,7 @@ __target_inc=1
 DEVICE_TYPE?=router
 
 # Default packages - the really basic set
-DEFAULT_PACKAGES:=base-files iw iptables kernel libc libgcc busybox dropbear mtd uci opkg netcat netifd fstools hostapd hostapd-common snmpd-static snmp-utils wireless-tools uhttpd kmod-ath kmod-ath9k kmod-ath9k-common kmod-cfg80211 kmod-crypto-aes kmod-crypto-arc4 kmod-crypto-core kmod-dnsresolver kmod-fs-nfs kmod-fs-nfs-common kmod-gpio-button-hotplug kmod-mac80211 kmod-ipt-core kmod-ipt-nat kmod-nf-conntrack kmod-nf-ipt kmod-nf-nat kmod-nf-nathelper nfs-utils procd swconfig uboot-envtools ubox ubus ubusd usign logd luci SPPH
+DEFAULT_PACKAGES:=base-files iw iptables kernel libc libgcc busybox dropbear mtd uci opkg netcat netifd fstools hostapd hostapd-common snmpd snmp-utils wireless-tools uhttpd kmod-ath kmod-ath9k kmod-ath9k-common kmod-cfg80211 kmod-dnsresolver kmod-fs-nfs kmod-fs-nfs-common kmod-gpio-button-hotplug kmod-mac80211 kmod-ipt-core kmod-ipt-nat kmod-nf-conntrack kmod-nf-ipt kmod-nf-nat kmod-nf-nathelper nfs-utils procd swconfig uboot-envtools ubox ubus ubusd usign logd luci curl SPPH
 # For nas targets
 DEFAULT_PACKAGES.nas:=
 # For router targets
