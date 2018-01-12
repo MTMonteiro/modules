@@ -1,0 +1,205 @@
+Current Target: "ramips (MT7620 based boards)"
+
+Available Profiles:
+
+Default:
+    Default Profile
+   
+ai-br100:
+    Aigale Ai-BR100
+   
+rp-n53:
+    Asus RP-N53
+    Packages: 
+rt-ac51u:
+    Asus RT-AC51U
+    
+rt-n14u:
+    Asus RT-N14u
+
+whr-1166d:
+    Buffalo WHR-1166D
+
+whr-300hp2:
+    Buffalo WHR-300HP2
+    
+whr-600d:
+    Buffalo WHR-600D
+
+wmr-300:
+    Buffalo WMR-300
+
+cf-wr800n:
+    Comfast CF-WR800N
+
+dch-m225:
+    D-Link DCH-M225
+
+dir-810l:
+    D-Link DIR-810L
+
+tiny-ac:
+    Dovado Tiny AC
+
+wrh-300cr:
+    Elecom WRH-300CR
+
+gl-mt300a:
+    GL-Inet GL-MT300A
+
+gl-mt300n:
+    GL-Inet GL-MT300N
+
+gl-mt750:
+    GL-Inet GL-MT750
+
+c108:
+    HNET C108
+
+hc5661:
+    HiWiFi HC5661
+
+hc5761:
+    HiWiFi HC5761
+
+hc5861:
+    HiWiFi HC5861
+
+u25awf-h1:
+    Kimax U25AWF-H1
+
+mlw221:
+    Kingston MLW221
+
+mlwg2:
+    Kingston MLWG2
+    
+y1:
+    Lenovo Y1
+     
+y1s:
+    Lenovo Y1S
+
+e1700:
+    Linksys E1700
+
+mt7620a_mt7530:
+    MediaTek MT7620a + MT7530 EVB
+
+mt7620a_mt7610e:
+    MediaTek MT7620a + MT7610e EVB
+
+mt7620a:
+    MediaTek MT7620a EVB
+
+mt7620a_v22sg:
+    MediaTek MT7620a V22SG
+
+microwrt:
+    Microduino MicroWRT
+
+ex2700:
+    Netgear EX2700
+
+ex3700-ex3800:
+    Netgear EX3700/EX3800
+
+wn3000rpv3:
+    Netgear WN3000RPv3
+
+wt3020-4M:
+    Nexx WT3020 (4MB)
+
+wt3020-8M:
+    Nexx WT3020 (8MB)
+
+oy-0001:
+    Oh Yeah OY-0001
+
+psg1208:
+    Phicomm PSG1208
+
+psg1218a:
+    Phicomm PSG1218 rev.Ax
+
+psg1218b:
+    Phicomm PSG1218 rev.Bx
+
+cs-qr10:
+    Planex CS-QR10
+
+db-wrt01:
+    Planex DB-WRT01
+
+mzk-750dhp:
+    Planex MZK-750DHP
+
+mzk-ex300np:
+    Planex MZK-EX300NP
+
+mzk-ex750np:
+    Planex MZK-EX750NP
+
+d240:
+    Sanlinking Technologies D240
+
+na930:
+    Sercomm NA930
+
+ArcherC20:
+    TP-Link ArcherC20
+
+ArcherC20i:
+    TP-Link ArcherC20i
+
+ArcherC50v1:
+    TP-Link ArcherC50v1
+
+ArcherMR200:
+    TP-Link ArcherMR200
+
+wrtnode:
+    WRTNode
+
+miwifi-mini:
+    Xiaomi MiWiFi Mini
+
+youku-yk1:
+    YOUKU YK1
+
+zte-q7:
+    ZTE Q7
+
+zbt-ape522ii:
+    Zbtlink ZBT-APE522II
+
+zbt-cpe102:
+    Zbtlink ZBT-CPE102
+    
+zbt-wa05:
+    Zbtlink ZBT-WA05
+
+we1026-5g-16m:
+    Zbtlink ZBT-WE1026-5G (16M)
+
+zbt-we2026:
+    Zbtlink ZBT-WE2026
+
+zbt-we826-16M:
+    Zbtlink ZBT-WE826 (16M)
+
+zbt-we826-32M:
+    Zbtlink ZBT-WE826 (32M)
+
+zbt-wr8305rt:
+    Zbtlink ZBT-WR8305RT
+
+kn_rc:
+    ZyXEL Keenetic Omni
+
+kn_rf:
+    ZyXEL Keenetic Omni II
+
+kng_rc:
+    ZyXEL Keenetic Viva
+

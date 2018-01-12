@@ -1,0 +1,463 @@
+
+Current Target: "ar71xx (Generic)"
+
+Available Profiles:
+
+
+ath5k:
+	Atheros 802.11abg WiFi (ath5k)
+
+CARAMBOLA2:
+	Carambola2 board from 8Devices
+	
+ALFAAP96:
+	ALFA Network AP96 board
+	
+HORNETUB:
+	ALFA Network Hornet-UB board (8MB flash, 32MB ram)
+	
+HORNETUBx2:
+	ALFA Network Hornet-UB-x2 board (16MB flash, 64MB ram)
+
+ALFANX:
+	ALFA Network N2/N5 board
+
+TUBE2H:
+	ALFA Network Tube2H board
+
+ALL0305:
+	Allnet ALL0305
+
+ALL0258N:
+	Allnet ALL0258N
+
+ALL0315N:
+	Allnet ALL0315N
+
+ANTMINER_S1:
+	Antminer S1
+
+ANTMINER_S3:
+	Antminer S3
+
+AP113:
+	Atheros AP113 reference board
+
+AP121:
+	Atheros AP121 reference board
+
+AP121MINI:
+	Atheros AP121-MINI reference board
+
+AP132:
+	Atheros AP132 reference board
+
+AP135:
+	Atheros AP135 reference board
+
+AP136:
+	Atheros AP136 reference board
+
+AP81:
+	Atheros AP81 reference board
+
+AP83:
+	Atheros AP83 reference board
+
+AP96:
+	Atheros AP96 reference board
+
+DB120:
+	Atheros DB120 reference board
+
+PB42:
+	Atheros PB42 reference board
+
+PB44:
+	Atheros PB44 reference board
+
+PB92:
+	Atheros PB92 reference board
+
+A02RBW300N:
+	Atlantis-Land A02-RB-W300N
+
+F9K1115V2:
+	Belkin AC1750DB (F9K1115V2)
+
+BXU2000N2:
+	BHU BXU2000n-2
+
+WZRHPG300NH:
+	Buffalo WZR-HP-G300NH
+
+WZRHPG300NH2:
+	Buffalo WZR-HP-G300NH2
+
+WZRHPAG300H:
+	Buffalo WZR-HP-AG300H
+
+WZRHPG450H:
+	Buffalo WZR-HP-G450H
+
+WZR450HP2:
+	Buffalo WZR-450HP2
+
+WZR600DHP:
+	Buffalo WZR-600DHP
+
+WHRG301N:
+	Buffalo WHR-G301N
+
+WHRHPG300N:
+	Buffalo WHR-HP-G300N
+
+WHRHPGN:
+	Buffalo WHR-HP-GN
+
+WLAEAG300N:
+	Buffalo WLAE-AG300N
+
+WP543:
+	Compex WP543/WPJ543
+
+WPE72:
+	Compex WPE72/WPE72NX
+
+WPJ344:
+	Compex WPJ344
+
+WPJ531:
+	Compex WPJ531
+
+WPJ558:
+	Compex WPJ558
+
+DHP1565A1:
+	D-Link DHP-1565 rev. A1
+
+DIR505A1:
+	D-Link DIR-505 rev. A1
+
+DIR600A1:
+	D-Link DIR-600 rev. A1
+
+DIR601A1:
+	D-Link DIR-601 rev. A1
+
+DIR601B1:
+	D-Link DIR-601 rev. B1
+
+DIR615C1:
+	D-Link DIR-615 rev. C1
+
+DIR615E1:
+	D-Link DIR-615 rev. E1
+
+DIR615E4:
+	D-Link DIR-615 rev. E4
+
+DIR825B1:
+	D-Link DIR-825 rev. B1
+
+DIR825C1:
+	D-Link DIR-825 rev. C1
+
+DIR835A1:
+	D-Link DIR-835 rev. A1
+
+DGL5500A1:
+	D-Link DGL-5500 rev. A1
+
+dLAN_pro_500_wp:
+	devolo dLAN pro 500 Wireless+
+
+dLAN_pro_1200_ac:
+	devolo dLAN pro 1200+ WiFi ac
+
+DRAGINO2:
+	DRAGINO2
+
+ELM150:
+	EasyLink EL-M150
+
+ELMINI:
+	EasyLink EL-MINI
+
+EAP300V2:
+	EnGenius EAP300V2
+
+ESR900:
+	EnGenius ESR900
+
+ESR1750:
+	EnGenius ESR1750
+
+EPG5000:
+	EnGenius EPG5000
+
+EWDORIN:
+	Embedded Wireless Dorin Platform
+
+GLINET:
+	GL.iNet
+
+HIWIFI_HC6361:
+	HiWiFi HC6361
+
+JA76PF:
+	jjPlus JA76PF
+
+JA76PF2:
+	jjPlus JA76PF2
+
+JWAP003:
+	jjPlus JWAP0003
+
+WRT160NL:
+	Linksys WRT160NL
+
+WRT400N:
+	Linksys WRT400N
+
+MR12:
+	Meraki MR12
+
+MR16:
+	Meraki MR16
+
+MAC1200R:
+	MERCURY MAC1200R
+
+SMART-300:
+	NC-LINK SMART-300
+
+WNDAP360:
+	NETGEAR WNDAP360
+
+WNDR3700:
+	NETGEAR WNDR3700/WNDR3800/WNDRMAC
+
+WNR2000V3:
+	NETGEAR WNR2000V3
+
+WNR2000V4:
+	NETGEAR WNR2000V4
+
+WNR612V2:
+	NETGEAR WNR612V2 / On Networks N150
+
+WNR1000V2:
+	NETGEAR WNR1000V2
+
+WNR2200:
+	NETGEAR WNR2200
+
+OMEGA:
+	Onion Omega
+
+OOLITE:
+	OOLITE
+
+OM2P:
+	OpenMesh OM2P/OM2Pv2/OM2P-HS/OM2P-HSv2/OM2P-LC
+
+OM5P:
+	OpenMesh OM5P/OM5P-AN
+
+MR600:
+	OpenMesh MR600
+
+MR900:
+	OpenMesh MR900/MR900v2
+
+OPENMESH:
+	OpenMesh products
+
+UBDEV01:
+	PowerCloud Systems ubdev01 model
+
+DLRTDEV01:
+	PowerCloud Systems dlrtdev01 model
+
+MZKW04NU:
+	Planex MZK-W04NU
+
+MZKW300NH:
+	Planex MZK-W300NH
+
+QIHOO360:
+	Qihoo 360 C301
+
+RW2458N:
+	Redwave RW2458N
+
+RNXN360RT:
+	Rosewill RNX-N360RT
+
+CAP4200AG:
+	Senao CAP4200AG
+
+WLR8100:
+	Sitecom WLR-8100
+
+BSB:
+	Smart Electronics Black Swift board
+
+ARCHERC7:
+	TP-LINK Archer C5/C7
+-ath10k
+CPE510:
+	TP-LINK CPE210/220/510/520
+
+TLMR10U:
+	TP-LINK TL-MR10U
+
+TLMR11U:
+	TP-LINK TL-MR11U
+
+TLMR12U:
+	TP-LINK TL-MR12U
+
+TLMR13U:
+	TP-LINK TL-MR13U
+
+TLMR3020:
+	TP-LINK TL-MR3020
+
+TLMR3040:
+	TP-LINK TL-MR3040
+
+TLMR3220:
+	TP-LINK TL-MR3220
+
+TLMR3420:
+	TP-LINK TL-MR3420
+
+TLWR703:
+	TP-LINK TL-WR703N
+
+TLWR710:
+	TP-LINK TL-WR710N
+
+TLWR720:
+	TP-LINK TL-WR720N
+
+TLWA701:
+	TP-LINK TL-WA701N/ND
+
+TLWA7210:
+	TP-LINK TL-WA7210N
+
+TLWA730RE:
+	TP-LINK TL-WA730RE
+
+TLWA750:
+	TP-LINK TL-WA750RE
+
+TLWA7510:
+	TP-LINK TL-WA7510N
+
+TLWA801:
+	TP-LINK TL-WA801N/ND
+
+TLWA830:
+	TP-LINK TL-WA830RE
+
+TLWA850:
+	TP-LINK TL-WA850RE
+
+TLWA860:
+	TP-LINK TL-WA860RE
+
+TLWA901:
+	TP-LINK TL-WA901N/ND
+
+TLWDR4300:
+	TP-LINK TL-WDR3500/3600/4300/4310/MW4350R
+
+TLWDR4900V2:
+	TP-LINK TL-WDR4900v2
+
+TLWR740:
+	TP-LINK TL-WR740N/ND
+
+TLWR741:
+	TP-LINK TL-WR741N/ND
+
+TLWR743:
+	TP-LINK TL-WR743N/ND
+
+TLWR841:
+	TP-LINK TL-WR841N/ND
+
+TLWR842:
+	TP-LINK TL-WR842N/ND
+
+TLWR843:
+	TP-LINK TL-WR843N/ND
+
+TLWR941:
+	TP-LINK TL-WR941N/ND
+
+TLWR1041:
+	TP-LINK TL-WR1041N
+
+TLWR1043:
+	TP-LINK TL-WR1043N/ND
+
+TLWR2543:
+	TP-LINK TL-WR2543N/ND
+
+TEW632BRP:
+	TRENDNet TEW-632BRP
+
+TEW652BRP:
+	TRENDNet TEW-652BRP
+
+TEW673GRU:
+	TRENDNet TEW-673GRU
+
+TEW712BR:
+	TRENDNet TEW-712BR
+
+TEW732BR:
+	TRENDNet TEW-732BR
+
+UBNTRS:
+	Ubiquiti RouterStation
+
+UBNTRSPRO:
+	Ubiquiti RouterStation Pro
+
+UBNTUNIFI:
+	Ubiquiti UniFi AP
+
+UBNTUNIFIOUTDOOR:
+	Ubiquiti UniFiAP Outdoor
+
+UAPPRO:
+	Ubiquiti UniFi AP Pro
+
+UBNT:
+	Ubiquiti Products
+
+MYNETN600:
+	WD My Net N600
+
+MYNETN750:
+	WD My Net N750
+
+MYNETREXT:
+	WD My Net Wi-Fi Range Extender
+
+ZCN1523H28:
+	Zcomax ZCN-1523H-2-8
+
+ZCN1523H516:
+	Zcomax ZCN-1523H-5-16
+
+NBG_460N_550N_550NH:
+	Zyxel NBG 460N/550N/550NH
+
+
