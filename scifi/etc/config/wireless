@@ -1,4 +1,3 @@
-
 config wifi-device 'radio0'
         option type 'mac80211'
         option channel '11'
@@ -11,8 +10,21 @@ config wifi-device 'radio0'
 config wifi-iface 'default_radio0'
         option device 'radio0'
         option mode 'ap'
-        option ssid 'REDE'  
+        option ssid 'REDE'
         option network 'lan'
-        option encryption 'none'
-                             
+        option encryption 'wpa2'
+        option auth_server '192.168.8.1'
+        option auth_port '1812'
+        option auth_secret 'scifiwifi1373'
+
+config wifi-iface
+        option device 'radio0'
+        option mode 'ap'
+        option network 'lan'
+        option encryption 'wpa2'
+        option auth_server '192.168.8.1'
+        option auth_port '1812'
+        option auth_secret 'scifiwifi1373'
+        option ssid 'BELUGA'
+
 
