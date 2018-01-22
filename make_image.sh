@@ -44,7 +44,7 @@ Usage:    $0
 
 Example1: $0 TLWR740 "procd snmp-utils snmpd-static swconfig uboot-envtools ubox ubus ubusd uhttpd usign wireless-tools wpa-cli wpad"	v4
 									
-Example2: $0 ArcherC20i "firewall" scifi v1
+Example2: $0 ArcherC20i " " scifi v1
 	
 Example3: $0 TLWR740 "firewall" uff v2
 
@@ -63,7 +63,7 @@ exit $1
  [ -z $1 ] && usage 1
   
 #checking if the first parameter is expected
- grep "$1" ./modelo_ar71xx.txt || grep "$1" ./modelo_rampis_7620.txt &> /dev/null 
+ grep "$1" ./modules/modelo_ar71xx.txt || grep "$1" ./modules/modelo_rampis_7620.txt &> /dev/null 
 
  if [ $? -ne 0 ] && [ "$1" != "sp" ] && [ "$1" != "spp" ]; then
    echo "
@@ -88,8 +88,8 @@ exit $1
   fi
 
  if [ $1 == "sp" ]; then 
-        cat ./modelo_ar71xx.txt
-        cat ./modelo_rampis_7620.txt 
+        cat ./modules/modelo_ar71xx.txt
+        cat ./modules/modelo_rampis_7620.txt 
         exit
  fi
   
@@ -104,7 +104,7 @@ time=`date +"%Y-%m-%d_%H-%M-%S"`
 
 #checking the profile platform
 chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
-./set_platform.sh $1
+./modules/set_platform.sh $1
  plt=$?
 
 
@@ -118,11 +118,11 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 #case generate image config
   if [ "$2" == "config" ]; then 
 
-    cp -f ./target_config.mk /tmp/$builder1/include/target.mk
-    sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder1/include/target.mk
-    cp -r ./config /tmp/$builder1/config2
+    cp -f ./modules/target_config.mk /tmp/$builder1/include/target.mk
+    sed s/SPPH/"$PACKAGES"/g ./modules/target_base.mk > /tmp/$builder1/include/target.mk
+    cp -r ./modules/config /tmp/$builder1/
     cd /tmp/$builder1
-    echo "$1-$4" > /tmp/$builder1/config2/www/device.txt
+    echo "$1-$4" > /tmp/$builder1/config/www/device.txt
 
     make image PROFILE=$1 FILES=config2 \
            BIN_DIR=/tmp/openwrt/$time
@@ -146,8 +146,8 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 
 #uff parameter
      if [ "$3" == "uff" ]; then
-           cp -r ./wifi-uff /tmp/$builder1/.
-           sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder1/include/target.mk
+           cp -r ./modules/wifi-uff /tmp/$builder1/.
+           sed s/SPPH/"$PACKAGES"/g ./modules/target_uff.mk > /tmp/$builder1/include/target.mk
            cd /tmp/$builder1
            make image PROFILE=$1 FILES=wifi-uff \
            BIN_DIR=/tmp/openwrt/$time
@@ -170,9 +170,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 
 #scifi parameter
       if [ "$3" == "scifi" ]; then          
-           cd ./scifi
-           chmod a+x install.sh
-           ./install.sh /tmp/$builder1
+          ########## editar ###########
            sed s/SPPH/"$PACKAGES"/g ./target_scifi.mk > /tmp/$builder1/include/target.mk
            cd /tmp/$builder1
            make image PROFILE=$1 FILES=scifi \
@@ -195,7 +193,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
        fi
 
 #empty parameter
-     sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder1/include/target.mk
+     sed s/SPPH/"$PACKAGES"/g ./modules/target_base.mk > /tmp/$builder1/include/target.mk
      cd /tmp/$builder1
      make image PROFILE=$1 BIN_DIR=/tmp/openwrt/$time 
      echo -e "voce gerou a imagem para $1, localizada no diretorio: /tmp/openwrt/$time " 
@@ -227,8 +225,8 @@ if [ $plt -eq 2 ]; then
 
 #config parameter 
 if [ "$2" == "config" ]; then 
-  sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder1/include/target.mk
-  cp -r ./config /tmp/$builder2/.
+  sed s/SPPH/"$PACKAGES"/g ./modules/target_uff.mk > /tmp/$builder1/include/target.mk
+  cp -r ./modules/config /tmp/$builder2/.
   cd /tmp/$builder2
 
    make image PROFILE=$1 FILES=config \
@@ -254,8 +252,8 @@ fi
 
 #uff parameter
    if [ "$3" == "uff" ]; then   
-           sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder2/include/target.mk                   
-           cp -r ./wifi-uff /tmp/$builder2/.
+           sed s/SPPH/"$PACKAGES"/g ./modules/target_uff.mk > /tmp/$builder2/include/target.mk                   
+           cp -r ./modules/wifi-uff /tmp/$builder2/.
            cd /tmp/$builder2
            make image PROFILE=$1 FILES=wifi-uff \
            BIN_DIR=/tmp/openwrt/$time
@@ -279,8 +277,8 @@ fi
 
 #scifi parameter 
       if [ "$3" == "scifi" ]; then
-           sed s/SPPH/"$PACKAGES"/g ./target_scifi.mk > /tmp/$builder2/include/target.mk
-           cp -r ./scifi /tmp/$builder2
+           sed s/SPPH/"$PACKAGES"/g ./modules/target_scifi.mk > /tmp/$builder2/include/target.mk
+           cp -r ./modules/scifi /tmp/$builder2
            cd /tmp/$builder2
            make image PROFILE=$1 FILES=scifi \
            BIN_DIR=/tmp/openwrt/$time
@@ -304,7 +302,7 @@ fi
        
 
 #empty parameter
-         sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder2/include/target.mk
+         sed s/SPPH/"$PACKAGES"/g ./modules/target_base.mk > /tmp/$builder2/include/target.mk
          cd /tmp/$builder2
          make image PROFILE=$1 BIN_DIR=/tmp/openwrt/$time        
          echo -e "voce gerou a imagem para $1, localizada no diretorio: /tmp/openwrt/$time "
