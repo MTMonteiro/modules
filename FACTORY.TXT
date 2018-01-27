@@ -1,5 +1,0 @@
-Abra o navegador e digite: http://tplinklogin.net
-Vá até: Ferramentas de sistema → Firmware
-E faça upload do firmware Openwrt.
-
-
