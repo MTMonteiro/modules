@@ -42,9 +42,9 @@ SET THE PARAMETERS!
 
 Usage:    $0	
 
-Example1: $0 TLWR740 "procd snmp-utils snmpd-static swconfig uboot-envtools ubox ubus ubusd uhttpd usign wireless-tools wpa-cli wpad"	v4
+Example1: $0 TLWR740 "snmp-utils snmpd-static" " " v4
 									
-Example2: $0 ArcherC20i "firewall" scifi v1
+Example2: $0 ArcherC20i " " scifi v1
 	
 Example3: $0 TLWR740 "firewall" uff v2
 
@@ -103,7 +103,7 @@ exit $1
 time=`date +"%Y-%m-%d_%H-%M-%S"`
 
 #checking the profile platform
-chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
+#chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 ./set_platform.sh $1
  plt=$?
 
@@ -112,19 +112,20 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 #AR71XX#
 ########
  if [ $plt -eq 1 ]; then
-   
+    cd ..
     cp -r ./$builder1 /tmp
-   
+    cd modules
+
 #case generate image config
   if [ "$2" == "config" ]; then 
+     cp -f ./target_config.mk /tmp/$builder1/include/target.mk
+     cp -r ./README /tmp/openwrt/$time
+     sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder1/include/target.mk
+     cp -r ./config /tmp/$builder1/config2
+     cd /tmp/$builder1
+     echo "$1-$4" > /tmp/$builder1/config2/www/device.txt
 
-    cp -f ./target_config.mk /tmp/$builder1/include/target.mk
-    sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder1/include/target.mk
-    cp -r ./config /tmp/$builder1/config2
-    cd /tmp/$builder1
-    echo "$1-$4" > /tmp/$builder1/config2/www/device.txt
-
-    make image PROFILE=$1 FILES=config2 \
+     make image PROFILE=$1 FILES=config2 \
            BIN_DIR=/tmp/openwrt/$time
            echo -e "voce gerou a imagem config para $1, localizada no diretorio: /tmp/openwrt/$time"
            chmod 777 /tmp/openwrt/$time           
@@ -137,7 +138,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
                   rm !(*$4*)
   
                else 
-                 echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                 echo "verifique as versões disponiveis que foram geradas."     
             fi
          fi
            exit
@@ -147,6 +148,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 #uff parameter
      if [ "$3" == "uff" ]; then
            cp -r ./wifi-uff /tmp/$builder1/.
+           cp -r ./README /tmp/openwrt/$time
            sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder1/include/target.mk
            cd /tmp/$builder1
            make image PROFILE=$1 FILES=wifi-uff \
@@ -162,18 +164,17 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
                  rm !(*$4*)
   
               else 
-                echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                echo "verifique as versões disponiveis que foram geradas."    
                fi
            fi
            exit
      fi
 
 #scifi parameter
-      if [ "$3" == "scifi" ]; then          
-           cd ./scifi
-           chmod a+x install.sh
-           ./install.sh /tmp/$builder1
+      if [ "$3" == "scifi" ]; then                   
            sed s/SPPH/"$PACKAGES"/g ./target_scifi.mk > /tmp/$builder1/include/target.mk
+           cp -r ./scifi /tmp/$builder2
+           cp -r ./README /tmp/openwrt/$time
            cd /tmp/$builder1
            make image PROFILE=$1 FILES=scifi \
            BIN_DIR=/tmp/openwrt/$time
@@ -188,7 +189,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
                  rm !(*$4*)
   
               else 
-                echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                echo "verifique as versões disponiveis que foram geradas."    
                fi
            fi
            exit
@@ -196,6 +197,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 
 #empty parameter
      sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder1/include/target.mk
+     cp -r ./README /tmp/openwrt/$time
      cd /tmp/$builder1
      make image PROFILE=$1 BIN_DIR=/tmp/openwrt/$time 
      echo -e "voce gerou a imagem para $1, localizada no diretorio: /tmp/openwrt/$time " 
@@ -210,7 +212,7 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
            rm !(*$4*)
   
         else 
-           echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+           echo "verifique as versões disponiveis que foram geradas."    
         fi
      fi
      exit
@@ -222,13 +224,14 @@ chmod a+x set_platform.sh #RETIRAR INTRODUZIDO NA INSTALAÇAO
 ###############
 
 if [ $plt -eq 2 ]; then
-
+  cd ..
   cp -r ./$builder2 /tmp
-
+  cd modules
 #config parameter 
 if [ "$2" == "config" ]; then 
   sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder1/include/target.mk
   cp -r ./config /tmp/$builder2/.
+  cp -r ./README /tmp/openwrt/$time
   cd /tmp/$builder2
 
    make image PROFILE=$1 FILES=config \
@@ -244,7 +247,7 @@ if [ "$2" == "config" ]; then
                rm !(*$4*)
   
   else 
-               echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+               echo "verifique as versões disponiveis que foram geradas."     
            fi
   fi
            exit
@@ -256,6 +259,7 @@ fi
    if [ "$3" == "uff" ]; then   
            sed s/SPPH/"$PACKAGES"/g ./target_uff.mk > /tmp/$builder2/include/target.mk                   
            cp -r ./wifi-uff /tmp/$builder2/.
+           cp -r ./README /tmp/openwrt/$time
            cd /tmp/$builder2
            make image PROFILE=$1 FILES=wifi-uff \
            BIN_DIR=/tmp/openwrt/$time
@@ -270,7 +274,7 @@ fi
                  rm !(*$4*)
   
                else 
-                 echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                 echo "verifique as versões disponiveis que foram geradas."     
                fi
             fi
            exit
@@ -281,6 +285,7 @@ fi
       if [ "$3" == "scifi" ]; then
            sed s/SPPH/"$PACKAGES"/g ./target_scifi.mk > /tmp/$builder2/include/target.mk
            cp -r ./scifi /tmp/$builder2
+           cp -r ./README /tmp/openwrt/$time
            cd /tmp/$builder2
            make image PROFILE=$1 FILES=scifi \
            BIN_DIR=/tmp/openwrt/$time
@@ -295,7 +300,7 @@ fi
                  rm !(*$4*)
   
               else 
-                echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                echo "verifique as versões disponiveis que foram geradas."    
                fi
             fi
            exit
@@ -305,6 +310,7 @@ fi
 
 #empty parameter
          sed s/SPPH/"$PACKAGES"/g ./target_base.mk > /tmp/$builder2/include/target.mk
+         cp -r ./README /tmp/openwrt/$time
          cd /tmp/$builder2
          make image PROFILE=$1 BIN_DIR=/tmp/openwrt/$time        
          echo -e "voce gerou a imagem para $1, localizada no diretorio: /tmp/openwrt/$time "
@@ -318,8 +324,8 @@ fi
                  rm !(*$4*)
   
               else 
-                echo "versão especificada não encontrada, verifique as versões disponiveis que foram geradas."    
+                echo "verifique as versões disponiveis que foram geradas."    
                fi
-           fi
+           fi        
       fi
 fi
