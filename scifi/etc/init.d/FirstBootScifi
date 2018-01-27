@@ -30,7 +30,9 @@ sed -i '/FirstBootScifi/d' /etc/rc.local
 /etc/init.d/FirstBootScifi disable                                                                                                             
 chmod 0700 /etc/dropbear
 chmod 0600 /etc/dropbear/authorized_keys
-chmod -R 0600 /etc/freeradius2/
+#chmod -R 0640 /etc/freeradius2/
+/usr/sbin/radiusd -d /etc/freeradius3/ -i 192.168.8.1 -p 1912 -n radiusd
+
                                                                                                          
 #exit 0                                                                                                                                        
 }                   
