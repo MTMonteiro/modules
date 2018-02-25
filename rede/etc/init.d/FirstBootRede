@@ -1,0 +1,45 @@
+#!/bin/sh /etc/rc.common                                                                                                                       
+# Copyright (C) 2006-2010 OpenWrt.org                                                                                                          
+# Copyright (C) 2006 Carlos Sobrinho                                                                                                           
+                                                                                                                                               
+START=99                                                                                                                                       
+USE_PROCD=1                                                                                                                                    
+                                                                                                                                               
+start_service() {                                                                                                                              
+                                                                                                                                               
+#Definir mac padr..o                                                                                                                           
+MAC1=$(ifconfig -a | grep eth0.1 | awk '{print $5}');                                                                                          
+MAC2=$(ifconfig -a | grep eth0.2 | awk '{print $5}');                                                                                          
+WLAN0=$(cat /sys/class/ieee80211/phy0/macaddress)                                                                                              
+                                                                                                                                               
+                                                                                                                                               
+mac1=`echo $MAC1 | awk '{print tolower ($ 0)}'`                                                                                                
+mac2=`echo $MAC2 | awk '{print tolower ($ 0)}'`                                                                                                
+                                                                                                                                               
+sed s/mac1/$mac1/g /etc/config/network > /tmp/network1                                                                                         
+sed s/mac2/$mac2/g /tmp/network1 > /etc/config/network  
+rm /tmp/network1   
+
+#usuario uhttpd
+sed s/mac1/$mac1/g /etc/config/uhttpd
+                                                        
+#Definindo senha, configura....es finais api12 e desabilitando script                                                                          
+echo -e "uffwificonfig\nuffwificonfig\n" |passwd root                                                                                          
+/etc/init.d/uhttpd enable                                                                                                                      
+/etc/init.d/dnsmasq enable                                                                                                                     
+/etc/init.d/uhttpd restart                                                                                                                
+/etc/init.d/network restart                                                                                                                    
+wifi                                                                                                                                           
+sed -i '/FirstBootScifi/d' /etc/rc.local                                                                                                      
+/etc/init.d/FirstBootScifi disable                                                                                                             
+chmod 0700 /etc/dropbear
+chmod 0600 /etc/dropbear/authorized_keys
+
+#curl 
+opkg install /curl/libcurl_7.58.0-1_mipsel_24kc.ipk
+opkg install /curl/curl_7.58.0-1_mipsel_24kc.ipk
+rm -rf /curl
+
+rm -rf /etc/init.d/FirstBootRede                                                                                                              
+
+}                   
