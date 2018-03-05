@@ -36,40 +36,9 @@ if [ "$?" -ne 0 ]; then
     uci commit wireless; wifi
     exit
 
-fi
-
-
-#test radius 
-echo "User-Name = scifi, User-Password = scifi" | \
-radclient -x 192.168.8.1 auth scifiwifi1373 &>null
-
-if [ "$?" -ne 0 ]; then                                   
-    
-    uci set wireless.default_radio0.disabled=1            
-    uci set wireless.@wifi-iface[1].disabled=1    
-    uci set wireless.@wifi-iface[2].disabled=1 
-    uci set wireless.@wifi-iface[3].ssid='#REDE#NO RADIUS'                          
-    uci set wireless.@wifi-iface[3].disabled=0                        
-    uci commit wireless; wifi
-    exit    
-                                                          
 fi    
 
-#test ldap
-echo "User-Name = 12345678901, User-Password = 123456" | \
-radclient -x 192.168.8.1 auth scifiwifi1373 &>null
 
-if [ "$?" -ne 0 ]; then
-    
-    uci set wireless.default_radio0.disabled=1            
-    uci set wireless.@wifi-iface[1].disabled=1    
-    uci set wireless.@wifi-iface[2].disabled=1 
-    uci set wireless.@wifi-iface[3].ssid='#REDE#NO LDAP'
-    uci set wireless.@wifi-iface[3].disabled=0                            
-    uci commit wireless; wifi
-    exit
-
-fi
 
 #everything is OK
 ssid_info=`uci get wireless.@wifi-iface[3].ssid`
