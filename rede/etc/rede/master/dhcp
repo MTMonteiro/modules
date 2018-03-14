@@ -42,5 +42,5 @@ config dhcp 'OPEN_ZONE'
 	option limit '35'
 	option netmask '255.255.255.0'
 	list dhcp_option '4,192.168.6.1'
-	option leasetime '5m'
+	option leasetime '2m'
 

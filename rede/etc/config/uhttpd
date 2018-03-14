@@ -2,8 +2,8 @@
 config uhttpd main
 
         # HTTP listen addresses, multiple allowed
-#       list listen_http        0.0.0.0:80
-#       list listen_http        [::]:80
+       list listen_http        0.0.0.0:80
+       list listen_http        [::]:80
 
         # HTTPS listen addresses, multiple allowed
        list listen_https       0.0.0.0:443
@@ -122,6 +122,6 @@ config cert px5g
 
 config httpauth 'prefix_user'
     option prefix '/'
-    option username 'mac1'
+    option username 'rede'
     option password 'rede'                         
 

@@ -1,4 +1,13 @@
 
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fdb0:729e:8e5d::/48'
+
 config interface 'lan'
 	option type 'bridge'
 	option proto 'static'
@@ -7,7 +16,7 @@ config interface 'lan'
 	option ipaddr '192.168.8.1'
 	option _orig_ifname 'eth0.1 lan'
 	option _orig_bridge 'true'
-	option ifname 'eth0.1 lan'
+	option ifname 'lan'
 
 config device 'lan_dev'
 	option name 'eth0.1'
@@ -46,7 +55,7 @@ config switch_vlan
 	option device 'switch0'
 	option vlan '3'
 	option vid '3'
-	option ports '1t 2t 3t 4t 6t'
+	option ports '0t 1t 2t 3t 4t 6t'
 
 config interface 'vlan_controle'
 	option proto 'static'
@@ -55,9 +64,11 @@ config interface 'vlan_controle'
 	option netmask '255.255.255.0'
 
 config interface 'OPEN_ZONE'
-	option type 'bridge'
 	option proto 'static'
-	option ifname 'eth0'
 	option ipaddr '192.168.6.1'
 	option netmask '255.255.255.0'
+	option type 'bridge'
+	option _orig_ifname 'eth0'
+	option _orig_bridge 'true'
+	option ifname 'eth0'
 

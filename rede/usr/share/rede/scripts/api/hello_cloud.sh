@@ -12,8 +12,11 @@ site=`grep site= /etc/rede/rede.conf | awk -F\= '{print $2 ; }'`
 if [ "$site" == "None" ]; then 
      rfirstcontact=`curl -u 1:Quetzalcoatl -d "ac=firstcontact&mac=$mac" -X POST https://rede.zone/transf/analyzer.php`
      [ $? = 0 ] && sed -i 's/site=None/site=1/'  /etc/rede/rede.conf 
+     date=`echo $rfirstcontact | awk '{print$1" "$2}'`
+     passwd=`echo $rfirstcontact | awk '{print$3}'`
+     sed -i 's/passwd=None/passwd='$passwd'/'  /etc/rede/rede.conf
      #date -s "YYYY-MM-DD hh:mm:ss"
-     date -s "$rfirstcontact"
+     date -s "$date"
 
 fi
 
@@ -22,18 +25,27 @@ fi
 # missing data #
 ################
 
-owner=`grep owner= /etc/rede/rede.conf | tr -d owner=`     
-ssid2=`grep ssid2= /etc/rede/rede.conf | tr -d ssid2=`   
-site=`grep site= /etc/rede/rede.conf | tr -d site=`
+owner=`grep owner= /etc/rede/rede.conf | awk -F\= '{print $2 ; }'`     
+ssid2=`grep ssid2= /etc/rede/rede.conf | awk -F\= '{print $2 ; }'`   
+site=`grep site= /etc/rede/rede.conf | awk -F\= '{print $2 ; }'`
 
-contact=`curl -u 1:Quetzalcoatl -d "ac=missing&owner=$owner&ssid2=$ssid2&site=$site" -X POST http://rede.zone/transf/analyzer.php`
+contact=`curl -u 1:Quetzalcoatl -d "ac=missing&owner=$owner&ssid2=$ssid2&site=$site" -X POST https://rede.zone/transf/analyzer.php`
+#answer
+contact2=`echo $contact | awk '{print$3}'`
+#date
+contact1=`echo $contact | awk '{print$1" "$2}'` 
 
+#date verification
+DateAp=`date +"%Y-%m-%d %H:%M"`
+DateServer=`echo $contact1 | awk -F\: '{print $1":"$2 ; }'`
+[ "$DateAp" -ne "$DateServer" ] && date -s "$contact1"
+6A5A
 
 #########################
 # collect and send data #
 #########################
 
-if [ "$contact" == "SENDDATA" ]; then 
+if [ "$contact2" == "SENDDATA" ]; then 
 	wlan0m=$(cat /sys/class/ieee80211/phy0/macaddress | awk '{print toupper($0)}')
 
 	#time=`date +"%Y-%m-%d %H:%M:%S"`
@@ -42,7 +54,7 @@ if [ "$contact" == "SENDDATA" ]; then
 	mac=`ifconfig -a | grep eth0.1 | awk '{print $5}' | tr -d :`
 
 
-	userst=0;for i in `ifconfig | grep wlan0 | awk '{print $1}'`; do let users1=$users1+`iw $i station dump | grep -c Station`;done
+	userst=0;for i in `ifconfig | grep wlan0 | awk '{print $1}'`; do let userst=$userst+`iw $i station dump | grep -c Station`;done
 	users1=0;for i in `ifconfig | grep "$wlan0m" | awk '{print $1}'`; do let users1=$users1+`iw $i station dump | grep -c Station`;done
 	users2=0;for i in `ifconfig | grep wlan0-1 | awk '{print $1}'`; do let users2=$users2+`iw $i station dump | grep -c Station`;done
 	users3=0;for i in `ifconfig | grep wlan0-2 | awk '{print $1}'`; do let users3=$users3+`iw $i station dump | grep -c Station`;done
@@ -79,7 +91,7 @@ if [ "$contact" == "SENDDATA" ]; then
         ip=$(($A*256^3+$B*256^2+$C*256+$D))
 
 
-	senddata=`curl -u 1:Quetzalcoatl -d "ac=data&time=$time&mac=$mac&userst=$userst&site=$site&ip=$ip&wanrx=$Wrx&wantx=$Wtx" -X POST http://rede.zone/transf/analyzer.php`
+	senddata=`curl -u 1:Quetzalcoatl -d "ac=data&time=$time&mac=$mac&userst=$userst&site=$site&ip=$ip&wanrx=$Wrx&wantx=$Wtx" -X POST https://rede.zone/transf/analyzer.php`
 
 
 	#senddata=`curl -u 1:Quetzalcoatl -d "ac=data&time=$time&mac=$mac&userst=$userst&users1=$users1&users2=$users2&users3=$users3&site=$site&ip=$ip&uptime=$up&channel=$ch&rede_rx=$Rrx&rede_tx=$Rtx&ssid_dominio=$ssidd&disabled_dominio=$stt&ssid2_rx=$Drx&ssid2_tx=$Dtx&ssid_info=$ssidi&location=$local&ip_ex=$ip_ex&memory=$memory&disk=$disk" -X POST http://rede.zone/transf/analyzer.php`
