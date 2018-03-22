@@ -39,8 +39,15 @@ config dhcp 'vlan_controle'
 config dhcp 'OPEN_ZONE'
 	option interface 'OPEN_ZONE'
 	option start '1'
-	option limit '35'
 	option netmask '255.255.255.0'
 	list dhcp_option '4,192.168.6.1'
-	option leasetime '2m'
+	option leasetime '5m'
+	option limit '100'
+
+config dhcp 'REDE_ZONE'
+	option start '30'
+	option leasetime '12h'
+	option limit '150'
+	option interface 'REDE_ZONE'
+
 

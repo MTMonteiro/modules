@@ -1,0 +1,21 @@
+	option 'txpower' '20'
+
+
+config wifi-iface 'rede'
+	option device 'radio0'
+	option mode 'ap'
+	option ssid 'REDE.ZONE'
+	option network 'REDE_ZONE'
+	option encryption 'wpa2'
+	option auth_server '104.196.48.80'
+	option auth_port '1812'
+	option auth_secret 'testing123'
+
+config wifi-iface 'open'
+	option device 'radio0'
+	option mode 'ap'
+	option encryption 'none'
+	option ssid 'OPEN ZONE'
+	option disabled '0'
+	option network 'OPEN_ZONE'
+

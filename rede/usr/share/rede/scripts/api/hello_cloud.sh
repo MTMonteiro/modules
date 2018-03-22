@@ -52,7 +52,7 @@ if [ "$contact2" == "SENDDATA" ]; then
 	time=`date +%s`
 
 	mac=`ifconfig -a | grep eth0.1 | awk '{print $5}' | tr -d :`
-
+	device=`cat /proc/cpuinfo | grep machine | awk -F\: '{print $2 ; }'`
 
 	userst=0;for i in `ifconfig | grep wlan0 | awk '{print $1}'`; do let userst=$userst+`iw $i station dump | grep -c Station`;done
 	users1=0;for i in `ifconfig | grep "$wlan0m" | awk '{print $1}'`; do let users1=$users1+`iw $i station dump | grep -c Station`;done

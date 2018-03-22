@@ -1,38 +1,32 @@
 #!/bin/sh
 #
 #
-#Matheus Monteiro
-#matheusmonteiroalves@id.uff.br
+# Matheus Monteiro
+# matheusmonteiroalves@id.uff.br
 #
 #uncoment for debug
 #set -xv
 
 
 #test ip
-ip=`ifconfig br-wan | grep "inet addr" | awk -F "addr:" '{print $2}' | awk '{print $1}'`
+ip=`ifconfig eth0.2 | grep "inet addr" | awk -F "addr:" '{print $2}' | awk '{print $1}'`
 
 if [ -z "$ip" ]; then                                               
     
-    uci set wireless.default_radio0.disabled=1            
-    uci set wireless.@wifi-iface[1].disabled=1    
-    uci set wireless.@wifi-iface[2].disabled=1
-    uci set wireless.@wifi-iface[3].ssid='#REDE#NO#IP'
-    uci set wireless.@wifi-iface[3].disabled=0                        
+    uci set wireless.rede.disabled=1            
+    uci set wireless.open.ssid='#REDE#NO#IP'                       
     uci commit wireless; wifi                                         
     exit                                                                  
 fi  
 
 
 #internet test
-nslookup www.uol.com.br 8.8.8.8 &>null
+nslookup www.uol.com.br 8.8.8.8 &> /dev/null 
 
 if [ "$?" -ne 0 ]; then
-
-    uci set wireless.default_radio0.disabled=1            
-    uci set wireless.@wifi-iface[1].disabled=1    
-    uci set wireless.@wifi-iface[2].disabled=1 
-    uci set wireless.@wifi-iface[3].ssid='#REDE#NO#INTERNET'
-    uci set wireless.@wifi-iface[3].disabled=0                        
+            
+    uci set wireless.rede.disabled=1     
+    uci set wireless.open.ssid='#REDE#NO#INTERNET'                        
     uci commit wireless; wifi
     exit
 
@@ -41,15 +35,12 @@ fi
 
 
 #everything is OK
-ssid_info=`uci get wireless.@wifi-iface[3].ssid`
+ssid_info=`uci get wireless.open.ssid`
 
 if [ "$ssid_info" != "OPEN ZONE" ];then 
     
-    uci set wireless.@wifi-iface[3].ssid='INFO'
-    uci set wireless.default_radio0.disabled=0
-    uci set wireless.@wifi-iface[1].disabled=0
-    uci set wireless.@wifi-iface[2].disabled=0
-    uci set wireless.@wifi-iface[3].disabled=0
+    uci set wireless.open.ssid='OPEN ZONE'
+    uci set wireless.rede.disabled=0
     uci commit wireless; wifi
     exit
 
