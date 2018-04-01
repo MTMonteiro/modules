@@ -1,36 +1,17 @@
-config wifi-iface 'default_radio0'
+#	option 'txpower' '20'
+
+
+config wifi-iface 'rede'
 	option device 'radio0'
 	option mode 'ap'
 	option ssid 'REDE.ZONE'
-	option network 'lan'
+	option network 'REDE_ZONE'
 	option encryption 'wpa2'
 	option auth_server '104.196.48.80'
 	option auth_port '1812'
 	option auth_secret 'testing123'
 
-config wifi-iface
-	option device 'radio0'
-	option mode 'ap'
-	option network 'lan'
-	option encryption 'wpa2'
-	option auth_server '104.196.48.80'
-	option auth_port '1812'
-	option auth_secret 'testing123'
-	option ssid 'DOMAIN'
-	option disabled '1'
-
-config wifi-iface
-	option device 'radio0'
-	option mode 'ap'
-	option network 'lan'
-	option encryption 'wpa2'
-	option auth_server '104.196.48.80'
-	option auth_port '1812'
-	option auth_secret 'testing123'
-	option ssid 'DOMAIN'
-	option disabled '1'
-
-config wifi-iface
+config wifi-iface 'open'
 	option device 'radio0'
 	option mode 'ap'
 	option encryption 'none'

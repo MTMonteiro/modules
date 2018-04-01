@@ -14,20 +14,6 @@ MAC1=$(ifconfig -a | grep eth0.1 | awk '{print $5}');
 MAC2=$(ifconfig -a | grep eth0.2 | awk '{print $5}'); 
 WLAN0=$(cat /sys/class/ieee80211/phy0/macaddress)
                                                                                                                                                
-#network
-sed -n '1,10p' /etc/config/network > /tmp/network
-cat /etc/rede/master/network >> /tmp/network
-mv -f /tmp/network /etc/config/
-
-#firewall
-cat /etc/rede/master/firewall > /etc/config/firewall
-
-#dhcp
-cat /etc/rede/master/dhcp > /etc/config/dhcp
-
-#uhttpd
-cat /etc/rede/master/uhttpd > /etc/config/uhttpd
-
 #definindo mac network
 #mac1=`echo $MAC1 | awk '{print tolower ($ 0)}'` 
 #mac2=`echo $MAC2 | awk '{print tolower ($ 0)}'` 
@@ -44,7 +30,7 @@ sed -i '/option mode/d' /etc/config/wireless
 sed -i '/option network/d' /etc/config/wireless
 sed -i '/option device/d' /etc/config/wireless
 sed -i '/config wifi-iface/d' /etc/config/wireless
-cat /etc/rede/master/wireless >> /etc/config/wireless
+
 #uci set wireless.radio0.channel='1'
 
 #usuario uhttpd
@@ -62,8 +48,6 @@ echo -e "uffwificonfig\nuffwificonfig\n" |passwd root
 wifi                                                                                                                                           
 sed -i '/FirstBootRede/d' /etc/rc.local                                                                                                      
 /etc/init.d/FirstBootRede disable                                                                                                             
-chmod 0700 /etc/dropbear
-chmod 0600 /etc/dropbear/authorized_keys
 
 #curl ArcherC20i
 #opkg install /curl/libcurl_7.58.0-1_mipsel_24kc.ipk

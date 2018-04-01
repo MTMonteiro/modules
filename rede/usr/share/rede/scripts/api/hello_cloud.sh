@@ -39,7 +39,7 @@ contact1=`echo $contact | awk '{print$1" "$2}'`
 DateAp=`date +"%Y-%m-%d %H:%M"`
 DateServer=`echo $contact1 | awk -F\: '{print $1":"$2 ; }'`
 [ "$DateAp" -ne "$DateServer" ] && date -s "$contact1"
-6A5A
+
 
 #########################
 # collect and send data #

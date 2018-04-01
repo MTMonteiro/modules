@@ -1,5 +1,5 @@
 5 04 * * * /bin/ash /usr/share/rede/scripts/restart_wifi.sh &> /dev/null
 5 04 * * * /bin/ash /usr/share/rede/scripts/update.sh &> /dev/null
 00 0 * * * /bin/ash /usr/share/rede/scripts/update.sh &> /dev/null                                                    
-*/3 * * * * /usr/share/rede/scripts/startup_error.sh &> /dev/null                             
+#*/3 * * * * /usr/share/rede/scripts/startup_error.sh &> /dev/null                             
 */5 * * * * /usr/share/rede/scripts/api/hello_cloud.sh &> /dev/null                     

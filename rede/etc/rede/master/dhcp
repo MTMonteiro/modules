@@ -47,7 +47,6 @@ config dhcp 'OPEN_ZONE'
 config dhcp 'REDE_ZONE'
 	option start '30'
 	option leasetime '12h'
-	option limit '150'
 	option interface 'REDE_ZONE'
-
+	option limit '253'
 
