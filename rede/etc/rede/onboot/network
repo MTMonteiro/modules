@@ -1,0 +1,59 @@
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+	option ula_prefix 'fdb6:77cc:918c::/48'
+
+config interface 'lan'
+	option ifname 'eth0.1'
+	option _orig_ifname 'eth0.1 radio0.network1'
+	option _orig_bridge 'true'
+	option proto 'none'
+
+config device 'lan_dev'
+	option name 'eth0.1'
+
+config interface 'wan'
+	option ifname 'eth0.2'
+	option proto 'dhcp'
+
+config device 'wan_dev'
+	option name 'eth0.2'
+
+config interface 'wan6'
+	option ifname 'eth0.2'
+	option proto 'dhcpv6'
+
+config switch
+	option name 'switch0'
+	option reset '1'
+	option enable_vlan '1'
+
+config switch_vlan
+	option device 'switch0'
+	option vlan '1'
+	option vid '1'
+	option ports '6t'
+
+config switch_vlan
+	option device 'switch0'
+	option vlan '2'
+	option vid '2'
+	option ports '0 1 2 3 4 6t'
+
+config switch_vlan
+	option device 'switch0'
+	option vlan '3'
+	option vid '3'
+	option ports '0t 1t 2t 3t 4t 6t'
+
+config interface 'VLAN_CONTROLE'
+	option ifname 'eth0.3'
+	option _orig_ifname 'eth0.3'
+	option _orig_bridge 'false'
+	option proto 'dhcp'
+

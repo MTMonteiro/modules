@@ -5,20 +5,7 @@
 # matheusmonteiroalves@id.uff.br
 #
 #uncoment for debug
-#set -xv
-
-
-#test ip
-ip=`ifconfig eth0.2 | grep "inet addr" | awk -F "addr:" '{print $2}' | awk '{print $1}'`
-
-if [ -z "$ip" ]; then                                               
-    
-    uci set wireless.rede.disabled=1            
-    uci set wireless.open.ssid='#REDE#NO#IP'                       
-    uci commit wireless; wifi                                         
-    exit                                                                  
-fi  
-
+#set -xv 
 
 #internet test
 nslookup www.uol.com.br 8.8.8.8 &> /dev/null 
@@ -26,7 +13,7 @@ nslookup www.uol.com.br 8.8.8.8 &> /dev/null
 if [ "$?" -ne 0 ]; then
             
     uci set wireless.rede.disabled=1     
-    uci set wireless.open.ssid='#REDE#NO#INTERNET'                        
+    uci set wireless.open.ssid='#REDE#NO#INTERNET'
     uci commit wireless; wifi
     exit
 

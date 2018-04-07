@@ -4,7 +4,10 @@
 # Matheus Monteiro Alves
 # matheusmonteiro@rede.zone
 #
-sleep 5
+cp -f /etc/rede/onboot/* /etc/config/     
+/etc/init.d/network restart 
+
+sleep 10
 route | grep 192.168.7.1
 
 if [ $? -eq 0 ];then 
@@ -28,9 +31,9 @@ else
 	cat /etc/rede/master/firewall > /etc/config/firewall
 
 fi
-/etc/init.d/uhttpd enable                                                                                                                      
+/etc/init.d/uhttpd enable 
 /etc/init.d/dnsmasq enable
-/etc/init.d/dnsmasq restart                                                                                                            
-/etc/init.d/uhttpd restart                                                                                                                
-/etc/init.d/network restart                                                                                                                    
+/etc/init.d/dnsmasq restart                                           
+/etc/init.d/uhttpd restart                                
+/etc/init.d/network restart 
 wifi
