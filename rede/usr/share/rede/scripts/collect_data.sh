@@ -3,7 +3,7 @@
 # matheus monteiro
 # matheusmonteiroalves@id.uff.br
 #
-set -xv
+#set -xv
 
 	wlan0m=$(cat /sys/class/ieee80211/phy0/macaddress | awk '{print toupper($0)}')
 
